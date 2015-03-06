@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-import logging
-
-from annoying.fields import JSONField
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models, transaction
 from django.utils import timezone
 from django.utils.importlib import import_module
-from requests_oauthlib.oauth1_session import TokenRequestDenied
+import logging
 from taggit.managers import TaggableManager
 
+from annoying.fields import JSONField
+from requests_oauthlib.oauth1_session import TokenRequestDenied
+
 from .exceptions import AccountLocked, LoginPasswordError
+
 
 log = logging.getLogger('oauth_tokens')
 
@@ -21,6 +22,7 @@ PROVIDERS = [
     'facebook',
     'twitter',
     'odnoklassniki',
+    'instagram',
 ]
 PROVIDER_CHOICES = [((provider, provider.title())) for provider in PROVIDERS]
 ACCESS_TOKENS_CLASSES = getattr(settings, 'OAUTH_TOKENS_CLASSES',
